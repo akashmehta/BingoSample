@@ -14,8 +14,13 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvBingo;
     BackgroundView bgView;
 
-    String[] array1 = new String[] {"A", "F", "C", "D"};
-    String[] array2 = new String[] {"A", "F", "C", "G"};
+    String[] array1 = new String[] {"A", "E", "I"};
+    String[] array2 = new String[] {"E", "I", "M"};
+    String[] array3 = new String[] {"B", "F", "J"};
+    String[] array4 = new String[] {"F", "J", "N"};
+    String[] array5 = new String[] {"C", "G", "K"};
+    String[] array6 = new String[] {"G", "K", "O"};
+    String[] array7 = new String[] {"D", "H", "L"};
 
     ArrayList<String[]> arrays = new ArrayList<>();
     ArrayList<Pair<Integer,Integer>> tileCoordinate = new ArrayList<>();
@@ -27,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         arrays.add(array1);
         arrays.add(array2);
+        arrays.add(array3);
+        arrays.add(array4);
+        arrays.add(array5);
+        arrays.add(array6);
+        arrays.add(array7);
+
         final ArrayList<String> charList = new ArrayList();
         for (int i = 65; i < 65 + 15 ; i++) {
             char item = (char)i;
@@ -75,16 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     tileCoordinate.add(coordinates);
                 }
 
-
-                ArrayList<ArrayList<Pair<Integer,Integer>>> paths = new ArrayList();
-                for (int i = 0; i < arrays.size(); i++) {
-                    ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
-                    for (int j = 0; j < arrays.get(i).length; j++) {
-                        pairs.add(tileCoordinate.get(charList.indexOf(arrays.get(i)[j])));
-                    }
-                    paths.add(pairs);
-                }
-                bgView.setItemArrays(paths);
             }
         });
     }
