@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String[]> arrays = new ArrayList<>();
     ArrayList<Pair<Integer,Integer>> tileCoordinate = new ArrayList<>();
 
-    String testCase = "ABC, BCD, EFG, FGH, IJK, JKL, MNO";
+    String testCase = "AFK, DGJ, GJM, CFI, HKN, BGL, EJO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
