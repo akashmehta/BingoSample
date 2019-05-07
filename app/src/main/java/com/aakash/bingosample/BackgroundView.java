@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Pair;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 public class BackgroundView extends View {
     Paint paint;
 
-    private ArrayList<ArrayList<Pair<Integer, Integer>>> paths= new ArrayList();
+    private ArrayList<ArrayList<TileDetails>> paths= new ArrayList();
 
     public BackgroundView(Context context) {
         super(context);
@@ -32,7 +31,7 @@ public class BackgroundView extends View {
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GRAY);
         paint.setStrokeWidth(10);
     }
 
@@ -41,15 +40,16 @@ public class BackgroundView extends View {
         super.onDraw(canvas);
         for (int i = 0; i < paths.size(); i++) {
             for (int j = 1; j < paths.get(i).size(); j++) {
-                Pair<Integer, Integer> point1 = paths.get(i).get(j-1);
-                Pair<Integer, Integer> point2 = paths.get(i).get(j);
-                canvas.drawLine(point1.first, point1.second, point2.first, point2.second, paint);
+                TileDetails point1 = paths.get(i).get(j-1);
+                TileDetails point2 = paths.get(i).get(j);
+                canvas.drawLine(point1.getxVal(), point1.getyVal(), point2.getxVal(),
+                        point2.getyVal(), paint);
             }
             invalidate();
         }
     }
 
-    public void setItemArrays(ArrayList<ArrayList<Pair<Integer, Integer>>> pathList) {
+    public void setItemArrays(ArrayList<ArrayList<TileDetails>> pathList) {
         this.paths = pathList;
         invalidate();
     }

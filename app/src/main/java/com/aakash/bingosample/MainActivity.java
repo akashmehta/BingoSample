@@ -16,10 +16,27 @@ public class MainActivity extends AppCompatActivity {
 
     String[] array1 = new String[] {"A", "F", "C", "D"};
     String[] array2 = new String[] {"A", "F", "C", "G"};
+    String[] array3 = new String[] {"A", "B", "F", "J"};
+    String[] array4 = new String[] {"A", "E", "J", "O"};
+    String[] array5 = new String[] {"A", "E", "I", "M", "J"};
+    String[] array6 = new String[] {"A", "F", "J", "K", "N"};
 
     ArrayList<String[]> arrays = new ArrayList<>();
-    ArrayList<Pair<Integer,Integer>> tileCoordinate = new ArrayList<>();
+    ArrayList<TileDetails> tileCoordinate = new ArrayList<>();
+    final ArrayList<String> charList = new ArrayList();
+    ArrayList<ArrayList<TileDetails>> paths = new ArrayList();
 
+    private boolean isTileInPath(int index) {
+        for (String[] path:
+             arrays) {
+            for (String tile:
+                 path) {
+                if (tile.contains(charList.get(index))) return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         arrays.add(array1);
         arrays.add(array2);
-        final ArrayList<String> charList = new ArrayList();
+        arrays.add(array3);
+        arrays.add(array4);
+        arrays.add(array5);
+        arrays.add(array6);
         for (int i = 65; i < 65 + 15 ; i++) {
             char item = (char)i;
             charList.add(String.valueOf(item));
@@ -47,16 +67,11 @@ public class MainActivity extends AppCompatActivity {
                     layoutManager.findViewByPosition(i).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            bgView.clearPathList();
-                            ArrayList<ArrayList<Pair<Integer,Integer>>> paths = new ArrayList();
-                            for (int i = 0; i < arrays.size(); i++) {
-                                ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
-                                for (int j = 0; j < arrays.get(i).length; j++) {
-                                    pairs.add(tileCoordinate.get(charList.indexOf(arrays.get(i)[j])));
-                                }
-                                paths.add(pairs);
+                            if (!isTileInPath(finalI)) {
+                                bgView.clearPathList();
                             }
-                            ArrayList<ArrayList<Pair<Integer,Integer>>> viewPaths = new ArrayList();
+                            
+                            ArrayList<ArrayList<TileDetails>> viewPaths = new ArrayList();
                             for (int j = 0; j < arrays.size(); j++) {
                                 for (int k = 0; k < arrays.get(j).length; k++) {
                                     if (arrays.get(j)[k].contains(charList.get(finalI))) {
@@ -65,32 +80,28 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                             bgView.setItemArrays(viewPaths);
-
                         }
                     });
                 }
 
                 for (int i = 0; i < charList.size(); i++) {
-                    Pair<Integer, Integer> coordinates = getCoordinate(layoutManager.findViewByPosition(i));
+                    TileDetails coordinates = getCoordinate(layoutManager.findViewByPosition(i));
                     tileCoordinate.add(coordinates);
                 }
-
-
-                ArrayList<ArrayList<Pair<Integer,Integer>>> paths = new ArrayList();
                 for (int i = 0; i < arrays.size(); i++) {
-                    ArrayList<Pair<Integer, Integer>> pairs = new ArrayList<>();
+                    ArrayList<TileDetails> pairs = new ArrayList<>();
                     for (int j = 0; j < arrays.get(i).length; j++) {
                         pairs.add(tileCoordinate.get(charList.indexOf(arrays.get(i)[j])));
                     }
                     paths.add(pairs);
                 }
-                bgView.setItemArrays(paths);
+
             }
         });
     }
 
-    private Pair<Integer, Integer> getCoordinate(View view) {
-        return new Pair((int)view.getX() + view.getWidth() / 2, (int)view.getY() + view.getHeight()/ 2 );
+    private TileDetails getCoordinate(View view) {
+        return new TileDetails((int)view.getX() + view.getWidth() / 2, (int)view.getY() + view.getHeight()/ 2 );
     }
 
 }
