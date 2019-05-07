@@ -14,29 +14,24 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvBingo;
     BackgroundView bgView;
 
-    String[] array1 = new String[] {"A", "E", "I"};
-    String[] array2 = new String[] {"E", "I", "M"};
-    String[] array3 = new String[] {"B", "F", "J"};
-    String[] array4 = new String[] {"F", "J", "N"};
-    String[] array5 = new String[] {"C", "G", "K"};
-    String[] array6 = new String[] {"G", "K", "O"};
-    String[] array7 = new String[] {"D", "H", "L"};
-
     ArrayList<String[]> arrays = new ArrayList<>();
     ArrayList<Pair<Integer,Integer>> tileCoordinate = new ArrayList<>();
+
+    String testCase = "ABC, BCD, EFG, FGH, IJK, JKL, MNO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        arrays.add(array1);
-        arrays.add(array2);
-        arrays.add(array3);
-        arrays.add(array4);
-        arrays.add(array5);
-        arrays.add(array6);
-        arrays.add(array7);
+        String[] testCasesAr = testCase.split(",");
+        for (int i = 0; i < testCasesAr.length; i++) {
+            String[] tile = new String[testCasesAr[i].trim().length()];
+            for (int j = 0; j < testCasesAr[i].trim().length(); j++) {
+                tile[j] = String.valueOf(testCasesAr[i].trim().toCharArray()[j]);
+            }
+            arrays.add(tile);
+        }
 
         final ArrayList<String> charList = new ArrayList();
         for (int i = 65; i < 65 + 15 ; i++) {
