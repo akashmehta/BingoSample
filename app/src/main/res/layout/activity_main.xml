@@ -16,4 +16,79 @@
         android:layout_height="wrap_content"
         android:id="@+id/rvBingoItems"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/rvBingoItems"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/rgTestCases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton
+                android:id="@+id/rbTC31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vertical Combos : AEI, EIM, BFJ, FJN, CGK, GKO, DHL"
+                />
+
+            <RadioButton
+                android:id="@+id/rbTC32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Combos : ABC, BCD, EFG, FGH, IJK, JKL, MNO"
+                />
+            <RadioButton
+                android:id="@+id/rbTC33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diagonal Combos : AFK, DGJ, GJM, CFI, HKN, BGL, EJO"
+                />
+            <RadioButton
+                android:id="@+id/rbTC41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vertical Combos : AEIM, BFJN, CGKO, CDHL, EIMN"
+                />
+            <RadioButton
+                android:id="@+id/rbTC42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Combos : ABCD, EFGH, IJKL, IMNO, EABC"
+                />
+            <RadioButton
+                android:id="@+id/rbTC43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diagonal Combos : DGJM"
+                />
+            <RadioButton
+                android:id="@+id/rbTC51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vertical Combos : AEIMN, BFJNO, BFJNM, CGKON, MIEAB, NJFBC, NJFBA, OKGCD, OKGCB"
+                />
+            <RadioButton
+                android:id="@+id/rbTC52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Combos : ABCDH, EFGHL, EFGHD, IJKLH, AEFGH, IEFGH, EIJKL, MIJKL, EABCD"
+                />
+            <RadioButton
+                android:id="@+id/rbTC61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vertical Combos : AEIMNO, MIEABC, CGKONM, NJFBCD, OKGCBA"
+                />
+            <RadioButton
+                android:id="@+id/rbTC62"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Combos : ABCDHL, DCBAEI, IJKLHD, AEIJKL, HGFEIM"
+                />
+
+        </RadioGroup>
+
+    </ScrollView>
+
 </RelativeLayout>

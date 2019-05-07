@@ -1,0 +1,28 @@
+Untitled Note
+3 Tiles Combos
+3.1  Vertical Combos
+AEI, EIM, BFJ, FJN, CGK, GKO, DHL
+3.2  Horizontal Combos
+ABC, BCD, EFG, FGH, IJK, JKL, MNO
+3.3  Diagonal Combos
+AFK, DGJ, GJM, CFI, HKN, BGL, EJO
+
+4 Tiles Combos
+4.1 Vertical Combos
+AEIM, BFJN, CGKO, CDHL, EIMN
+4.2 Horizontal Combos
+ABCD, EFGH, IJKL, IMNO, EABC
+4.3 Diagonal Combos
+DGJM
+
+5 Tiles Combos
+5.1 Vertical Combos
+AEIMN, BFJNO, BFJNM, CGKON, MIEAB, NJFBC, NJFBA, OKGCD, OKGCB
+5.2 Horizontal Combos
+ABCDH, EFGHL, EFGHD, IJKLH, AEFGH, IEFGH, EIJKL, MIJKL, EABCD
+
+6 Tiles Combos
+6.1 Vertical Combos
+AEIMNO, MIEABC, CGKONM, NJFBCD, OKGCBA
+6.2 Horizontal Combos
+ABCDHL, DCBAEI, IJKLHD, AEIJKL, HGFEIM

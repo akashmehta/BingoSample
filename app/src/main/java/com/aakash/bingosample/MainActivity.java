@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.View;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
@@ -13,17 +14,24 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView rvBingo;
     BackgroundView bgView;
+    RadioGroup rgTestCases;
 
     ArrayList<String[]> arrays = new ArrayList<>();
     ArrayList<Pair<Integer,Integer>> tileCoordinate = new ArrayList<>();
 
-    String testCase = "AFK, DGJ, GJM, CFI, HKN, BGL, EJO";
+    String testCase_3_1 = "AEI, EIM, BFJ, FJN, CGK, GKO, DHL";
+    String testCase_3_2 = "ABC, BCD, EFG, FGH, IJK, JKL, MNO";
+    String testCase_3_3 = "AFK, DGJ, GJM, CFI, HKN, BGL, EJO";
+    String testCase_4_1 = "AEIM, BFJN, CGKO, CDHL, EIMN";
+    String testCase_4_2 = "ABCD, EFGH, IJKL, IMNO, EABC";
+    String testCase_4_3 = "DGJM";
+    String testCase_5_1 = "AEIMN, BFJNO, BFJNM, CGKON, MIEAB, NJFBC, NJFBA, OKGCD, OKGCB";
+    String testCase_5_2 = "ABCDH, EFGHL, EFGHD, IJKLH, AEFGH, IEFGH, EIJKL, MIJKL, EABCD";
+    String testCase_6_1 = "AEIMNO, MIEABC, CGKONM, NJFBCD, OKGCBA";
+    String testCase_6_2 = "ABCDHL, DCBAEI, IJKLHD, AEIJKL, HGFEIM";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    private void setArrays(String testCase) {
+        arrays.clear();
         String[] testCasesAr = testCase.split(",");
         for (int i = 0; i < testCasesAr.length; i++) {
             String[] tile = new String[testCasesAr[i].trim().length()];
@@ -32,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
             }
             arrays.add(tile);
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         final ArrayList<String> charList = new ArrayList();
         for (int i = 65; i < 65 + 15 ; i++) {
@@ -41,6 +55,44 @@ public class MainActivity extends AppCompatActivity {
 
         bgView = findViewById(R.id.bgView);
         rvBingo = findViewById(R.id.rvBingoItems);
+        rgTestCases = findViewById(R.id.rgTestCases);
+        rgTestCases.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rbTC31:
+                        setArrays(testCase_3_1);
+                        break;
+                    case R.id.rbTC32:
+                        setArrays(testCase_3_2);
+                        break;
+                    case R.id.rbTC33:
+                        setArrays(testCase_3_3);
+                        break;
+                    case R.id.rbTC41:
+                        setArrays(testCase_4_1);
+                        break;
+                    case R.id.rbTC42:
+                        setArrays(testCase_4_2);
+                        break;
+                    case R.id.rbTC43:
+                        setArrays(testCase_4_3);
+                        break;
+                    case R.id.rbTC51:
+                        setArrays(testCase_5_1);
+                        break;
+                    case R.id.rbTC52:
+                        setArrays(testCase_5_2);
+                        break;
+                    case R.id.rbTC61:
+                        setArrays(testCase_6_1);
+                        break;
+                    case R.id.rbTC62:
+                        setArrays(testCase_6_2);
+                        break;
+                }
+            }
+        });
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         rvBingo.setLayoutManager(layoutManager);
         rvBingo.setAdapter(new BingoAdapter(charList));
