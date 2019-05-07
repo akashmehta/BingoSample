@@ -42,6 +42,11 @@ public class BackgroundView extends View {
             for (int j = 1; j < paths.get(i).size(); j++) {
                 TileDetails point1 = paths.get(i).get(j-1);
                 TileDetails point2 = paths.get(i).get(j);
+                if (point1.getState() == point2.getState() && point1.getState() == TileDetails.STATE_SELECTED) {
+                    paint.setColor(Color.YELLOW);
+                } else {
+                    paint.setColor(Color.GRAY);
+                }
                 canvas.drawLine(point1.getxVal(), point1.getyVal(), point2.getxVal(),
                         point2.getyVal(), paint);
             }

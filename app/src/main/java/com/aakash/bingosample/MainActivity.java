@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        paths.clear();
+        // TODO need to upcate paths array when arrays will be updated
         arrays.add(array1);
         arrays.add(array2);
         arrays.add(array3);
@@ -70,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
                             if (!isTileInPath(finalI)) {
                                 bgView.clearPathList();
                             }
-                            
                             ArrayList<ArrayList<TileDetails>> viewPaths = new ArrayList();
                             for (int j = 0; j < arrays.size(); j++) {
                                 for (int k = 0; k < arrays.get(j).length; k++) {
                                     if (arrays.get(j)[k].contains(charList.get(finalI))) {
+                                        paths.get(j).set(k, paths.get(j).get(k).updateState(TileDetails.STATE_SELECTED));
                                         viewPaths.add(paths.get(j));
                                     }
                                 }
@@ -88,12 +90,14 @@ public class MainActivity extends AppCompatActivity {
                     TileDetails coordinates = getCoordinate(layoutManager.findViewByPosition(i));
                     tileCoordinate.add(coordinates);
                 }
+
+                // TODO update it when primary paths list changes.
                 for (int i = 0; i < arrays.size(); i++) {
-                    ArrayList<TileDetails> pairs = new ArrayList<>();
+                    ArrayList<TileDetails> tiles = new ArrayList<>();
                     for (int j = 0; j < arrays.get(i).length; j++) {
-                        pairs.add(tileCoordinate.get(charList.indexOf(arrays.get(i)[j])));
+                        tiles.add(tileCoordinate.get(charList.indexOf(arrays.get(i)[j])));
                     }
-                    paths.add(pairs);
+                    paths.add(tiles);
                 }
 
             }

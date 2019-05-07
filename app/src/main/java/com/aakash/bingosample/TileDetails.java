@@ -19,6 +19,18 @@ public class TileDetails {
     public TileDetails() {
     }
 
+    public TileDetails updateXval(int xVal) {
+        return new TileDetails(xVal, this.yVal, this.state);
+    }
+
+    public TileDetails updateYval(int yVal) {
+        return new TileDetails(this.xVal, yVal, this.state);
+    }
+
+    public TileDetails updateState(int state) {
+        return new TileDetails(this.xVal, this.yVal, state);
+    }
+
     public TileDetails(int xVal, int yVal) {
         this.xVal = xVal;
         this.yVal = yVal;
