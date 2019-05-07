@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     String testCase_5_2 = "ABCDH, EFGHL, EFGHD, IJKLH, AEFGH, IEFGH, EIJKL, MIJKL, EABCD";
     String testCase_6_1 = "AEIMNO, MIEABC, CGKONM, NJFBCD, OKGCBA";
     String testCase_6_2 = "ABCDHL, DCBAEI, IJKLHD, AEIJKL, HGFEIM";
+    String testCase_6_3 = "ABCDGJM, ABCFE";
 
     private void setArrays(String testCase) {
         arrays.clear();
@@ -89,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.rbTC62:
                         setArrays(testCase_6_2);
+                        break;
+                    case R.id.rbCustom:
+                        setArrays(testCase_6_3);
                         break;
                 }
             }
