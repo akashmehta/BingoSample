@@ -1,5 +1,6 @@
 package com.aakash.bingosample;
 
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     final ArrayList<BingoViewModel> viewModels = new ArrayList<>();
     final ArrayList<String> charList = new ArrayList<>();
     ArrayList<ArrayList<TileDetails>> paths = new ArrayList<>();
+    private NestedScrollView nsvContent;
 
     private boolean isTileInPath(int index) {
         for (String[] path:
@@ -60,7 +62,13 @@ public class MainActivity extends AppCompatActivity {
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         rvBingo.setLayoutManager(layoutManager);
         rvBingo.setAdapter(new BingoAdapter(viewModels));
-
+        nsvContent = findViewById(R.id.nsvContent);
+        nsvContent.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
+                bgView.scrollTo(i, i1);
+            }
+        });
         rvBingo.post(new Runnable() {
             @Override
             public void run() {
