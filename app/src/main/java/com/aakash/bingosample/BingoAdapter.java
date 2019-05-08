@@ -17,7 +17,7 @@ public class BingoAdapter extends RecyclerView.Adapter<BingoAdapter.BingoHolder>
 
     private final ArrayList<BingoViewModel> bingoItems;
 
-    BingoAdapter(ArrayList<BingoViewModel> bingoItems) {
+    public BingoAdapter(ArrayList<BingoViewModel> bingoItems) {
         this.bingoItems = bingoItems;
     }
 
