@@ -5,6 +5,8 @@ public class TileDetails {
     public static final int STATE_SELECTED = 1;
     public static final int STATE_RIGHT_OPTION = 2;
     public static final int STATE_WRONG_OPTION = 3;
+    public static final int STATE_SELECTED_WRONG_OPTION = 4;
+    public static final int STATE_SELECTED_RIGHT_OPTION = 5;
 
     private int xVal;
     private int yVal;

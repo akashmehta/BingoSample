@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -23,15 +22,16 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String[]> arrays = new ArrayList<>();
     ArrayList<TileDetails> tileCoordinate = new ArrayList<>();
-    final ArrayList<String> charList = new ArrayList();
-    ArrayList<ArrayList<TileDetails>> paths = new ArrayList();
+    final ArrayList<BingoViewModel> viewModels = new ArrayList<>();
+    final ArrayList<String> charList = new ArrayList<>();
+    ArrayList<ArrayList<TileDetails>> paths = new ArrayList<>();
 
     private boolean isTileInPath(int index) {
         for (String[] path:
              arrays) {
             for (String tile:
                  path) {
-                if (tile.contains(charList.get(index))) return true;
+                if (tile.contains(viewModels.get(index).getText())) return true;
             }
         }
         return false;
@@ -51,20 +51,20 @@ public class MainActivity extends AppCompatActivity {
         arrays.add(array5);
         arrays.add(array6);
         for (int i = 65; i < 65 + 15 ; i++) {
-            char item = (char)i;
-            charList.add(String.valueOf(item));
+            viewModels.add(new BingoViewModel(String.valueOf((char)i)));
+            charList.add(String.valueOf((char)i));
         }
 
         bgView = findViewById(R.id.bgView);
         rvBingo = findViewById(R.id.rvBingoItems);
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         rvBingo.setLayoutManager(layoutManager);
-        rvBingo.setAdapter(new BingoAdapter(charList));
+        rvBingo.setAdapter(new BingoAdapter(viewModels));
 
         rvBingo.post(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < charList.size(); i++) {
+                for (int i = 0; i < viewModels.size(); i++) {
                     final int finalI = i;
                     layoutManager.findViewByPosition(i).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -72,10 +72,31 @@ public class MainActivity extends AppCompatActivity {
                             if (!isTileInPath(finalI)) {
                                 bgView.clearPathList();
                             }
+                            switch (finalI) {
+                                case 0:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_NOT_SELECTED));
+                                    break;
+                                case 1:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_SELECTED));
+                                    break;
+                                case 2:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_RIGHT_OPTION));
+                                    break;
+                                case 3:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_WRONG_OPTION));
+                                    break;
+                                case 4:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_SELECTED_RIGHT_OPTION));
+                                    break;
+                                case 5:
+                                    viewModels.set(finalI, viewModels.get(finalI).updateState(TileDetails.STATE_SELECTED_WRONG_OPTION));
+                                    break;
+                            }
+                            rvBingo.getAdapter().notifyItemChanged(finalI);
                             ArrayList<ArrayList<TileDetails>> viewPaths = new ArrayList();
                             for (int j = 0; j < arrays.size(); j++) {
                                 for (int k = 0; k < arrays.get(j).length; k++) {
-                                    if (arrays.get(j)[k].contains(charList.get(finalI))) {
+                                    if (arrays.get(j)[k].contains(viewModels.get(finalI).getText())) {
                                         paths.get(j).set(k, paths.get(j).get(k).updateState(TileDetails.STATE_SELECTED));
                                         viewPaths.add(paths.get(j));
                                     }
@@ -87,8 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < charList.size(); i++) {
-                    TileDetails coordinates = getCoordinate(layoutManager.findViewByPosition(i));
-                    tileCoordinate.add(coordinates);
+                    tileCoordinate.add(getCoordinate(layoutManager.findViewByPosition(i)));
                 }
 
                 // TODO update it when primary paths list changes.
