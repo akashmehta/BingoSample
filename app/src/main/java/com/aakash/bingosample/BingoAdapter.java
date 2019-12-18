@@ -13,14 +13,14 @@ public class BingoAdapter extends RecyclerView.Adapter<BingoAdapter.BingoHolder>
 
     private final ArrayList<String> bingoItems;
 
-    public BingoAdapter(ArrayList<String> bingoItems) {
+    BingoAdapter(ArrayList<String> bingoItems) {
         this.bingoItems = bingoItems;
     }
 
     @NonNull
     @Override
     public BingoHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new BingoHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_bingo_item, null));
+        return new BingoHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_bingo_item, viewGroup, false));
     }
 
     @Override
@@ -35,9 +35,9 @@ public class BingoAdapter extends RecyclerView.Adapter<BingoAdapter.BingoHolder>
         return bingoItems.size();
     }
 
-    public class BingoHolder extends RecyclerView.ViewHolder {
+    class BingoHolder extends RecyclerView.ViewHolder {
 
-        public BingoHolder(@NonNull View itemView) {
+        BingoHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

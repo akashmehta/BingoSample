@@ -13,24 +13,24 @@ import java.util.ArrayList;
 public class BackgroundView extends View {
     Paint paint;
 
-    private ArrayList<ArrayList<Pair<Integer, Integer>>> paths= new ArrayList();
+    private ArrayList<ArrayList<Pair<Integer, Integer>>> paths= new ArrayList<>();
 
     public BackgroundView(Context context) {
         super(context);
-        init(context, null, 0);
+        init();
     }
 
     public BackgroundView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0);
+        init();
     }
 
     public BackgroundView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr);
+        init();
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+    private void init() {
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(10);
